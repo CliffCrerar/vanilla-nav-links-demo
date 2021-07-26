@@ -9,7 +9,8 @@ const byId = id => document.getElementById(id),
 // create nav elements
 
 const navUnorderedList = create('ul');
-navUnorderedList.classList.add('navbar-nav nav');
+navUnorderedList.classList.add('nav');
+navUnorderedList.classList.add('d-flex');
 
 // this is a function expression - know the diffs
 function getNavLinksData() {
@@ -18,12 +19,9 @@ function getNavLinksData() {
 
 function setNavLinksFromData(data) {
   const navBar = byTag('nav')[0];
-  // navBar.classList.add('navbar');
+  navBar.classList.add('navbar');
   navBar.appendChild(navUnorderedList);
-  setTimeout(() => {
-    toggleSpinner();
-    data.forEach(appendNavlinksToUnorderedList);
-  }, 1000);
+  setTimeout(() => timeOutAndLoad(data), 1000);
 }
 
 function createAnchor({ href, innerHTML, title }) {
@@ -31,23 +29,24 @@ function createAnchor({ href, innerHTML, title }) {
   newAnchor.title = title;
   newAnchor.innerHTML = innerHTML;
   newAnchor.href = href;
-
+  newAnchor.classList.add('nav-link');
   return newAnchor;
 }
 
 function createNewListItem(anchor) {
   const newListItem = create('li');
-  newListItem.classList.add('nav-link');
   newListItem.appendChild(anchor);
-  // log(anchor.pathname);
-  // if (location.pathname === anchor.pathname) {
-  //   anchor.classList.add('active');
-  // }
+  newListItem.classList.add('nav-item');
   return newListItem;
 }
 
 function appendNavlinksToUnorderedList(e) {
   navUnorderedList.appendChild(createNewListItem(createAnchor(e)));
+}
+
+function timeOutAndLoad(data) {
+  toggleSpinner();
+  data.forEach(appendNavlinksToUnorderedList);
 }
 
 window.onload = function() {
