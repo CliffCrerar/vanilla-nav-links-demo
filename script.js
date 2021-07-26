@@ -17,14 +17,10 @@ function getNavLinksData() {
 }
 
 function setNavLinksFromData(data) {
-  console.log(data);
   byTag('nav')[0].appendChild(navUnorderedList);
-  navUnorderedList;
   setTimeout(() => {
-    data.forEach(e => {
-      navUnorderedList.appendChild(createNewListItem(createAnchor(e)));
-      toggleSpinner();
-    });
+    toggleSpinner();
+    data.forEach(appendNavlinksToUnorderedList);
   }, 2000);
 }
 
@@ -41,6 +37,10 @@ function createNewListItem(anchor) {
   newListItem.classList.add('nav-link');
   newListItem.appendChild(anchor);
   return newListItem;
+}
+
+function appendNavlinksToUnorderedList(e) {
+  navUnorderedList.appendChild(createNewListItem(createAnchor(e)));
 }
 
 window.onload = function() {
