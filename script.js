@@ -4,13 +4,48 @@ console.log('Nav Links Demo in Vanilla!');
 const byId = id => document.getElementById(id),
   byTag = tag => document.getElementsByTagName(tag),
   create = el => document.createElement(el),
-  clone = el => Object.assign({}, el);
+  log = (...params) => console.log(...params);
 
 // create nav elements
+
 const navUnorderedList = create('ul');
-const navLink = create('li');
+navUnorderedList.classList.add('nav');
 
 // this is a function expression - know the diffs
 function getNavLinksData() {
-  return fetch();
+  return fetch(byTag('a')[0].href);
 }
+
+function setNavLinksFromData(data) {
+  console.log(data);
+  byTag('nav')[0].appendChild(navUnorderedList);
+  navUnorderedList;
+  setTimeout(() => {
+    data.forEach(e => {
+      navUnorderedList.appendChild(createNewListItem(createAnchor(e)));
+      toggleSpinner();
+    });
+  }, 2000);
+}
+
+function createAnchor({ href, innerHTML, title }) {
+  const newAnchor = create('a');
+  newAnchor.title = title;
+  newAnchor.innerHTML = innerHTML;
+  newAnchor.href = href;
+  return newAnchor;
+}
+
+function createNewListItem(anchor) {
+  const newListItem = create('li');
+  newListItem.classList.add('nav-link');
+  newListItem.appendChild(anchor);
+  return newListItem;
+}
+
+window.onload = function() {
+  getNavLinksData().then(response => {
+    response.json().then(setNavLinksFromData);
+  });
+  document.body.prepend(spinner);
+};
