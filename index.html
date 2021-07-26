@@ -1,11 +1,33 @@
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <script src="script.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
-  </head>
-  <body>
-    <h1>Hello there!</h1>
-    <a href="/me.html">My other page</a>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <script src="./script.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+<div>
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <span>Loading navlinks . . .</span>
+
+  <nav />
+  <div class="spinner">
+    <hr>
+    <header>
+    </header>
+
+    <script>
+      const header  = byTag('header')[0];
+    const heading = create('h1');
+
+    header.appendChild(heading);
+
+    heading.classList.add('display-1')
+    heading.innerText = 'Data Driven Navlinks Demo'
+    </script>
+</body>
+
 </html>
