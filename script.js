@@ -9,7 +9,7 @@ const byId = id => document.getElementById(id),
 // create nav elements
 
 const navUnorderedList = create('ul');
-navUnorderedList.classList.add('nav');
+navUnorderedList.classList.add('navbar-nav nav');
 
 // this is a function expression - know the diffs
 function getNavLinksData() {
@@ -17,11 +17,13 @@ function getNavLinksData() {
 }
 
 function setNavLinksFromData(data) {
-  byTag('nav')[0].appendChild(navUnorderedList);
+  const navBar = byTag('nav')[0];
+  // navBar.classList.add('navbar');
+  navBar.appendChild(navUnorderedList);
   setTimeout(() => {
     toggleSpinner();
     data.forEach(appendNavlinksToUnorderedList);
-  }, 2000);
+  }, 1000);
 }
 
 function createAnchor({ href, innerHTML, title }) {
@@ -29,6 +31,7 @@ function createAnchor({ href, innerHTML, title }) {
   newAnchor.title = title;
   newAnchor.innerHTML = innerHTML;
   newAnchor.href = href;
+
   return newAnchor;
 }
 
@@ -36,6 +39,10 @@ function createNewListItem(anchor) {
   const newListItem = create('li');
   newListItem.classList.add('nav-link');
   newListItem.appendChild(anchor);
+  // log(anchor.pathname);
+  // if (location.pathname === anchor.pathname) {
+  //   anchor.classList.add('active');
+  // }
   return newListItem;
 }
 
